@@ -27,38 +27,37 @@ void Board::initializeBoard()
 
 Board::Board()
 {
+    this->hexTiles = new vector<HexTile>();
+    this->roads = new vector<Road>();
+    this->settlements = new vector<Settlement>();
+    this->cities = new vector<City>();
     coords = Coords();
-    hexTiles = new vector<HexTile>();
-    roads = new vector<Road>();
-    settlements = new vector<Settlement>();
-    cities = new vector<City>();
     initializeBoard();
 }
 
-Board::~Board()
-{
-    delete hexTiles;
-    delete roads;
-    delete settlements;
-    delete cities;
+Board::~Board() {
+    delete this->hexTiles;
+    delete this->roads;
+    delete this->settlements;
+    delete this->cities;
 }
 
-vector<Settlement> *Board::getSettlements()
+vector<Settlement>* Board::getSettlements()
 {
     return settlements;
 }
 
-vector<Road> *Board::getRoads()
+vector<Road>* Board::getRoads()
 {
     return roads;
 }
 
-vector<City> *Board::getCities()
+vector<City>* Board::getCities()
 {
     return cities;
 }
 
-vector<HexTile> *Board::getHexTiles()
+vector<HexTile>* Board::getHexTiles()
 {
     return hexTiles;
 }
@@ -169,7 +168,7 @@ bool Board::CanPlaceCity(City city)
         cout << "There is NO Such Coord" << endl;
         return false;
     }
-
+    
     for (size_t i = 0; i < settlements->size(); i++)
     {
         if (settlements->at(i).coord == city.coord && settlements->at(i).owner == city.owner)
@@ -276,7 +275,7 @@ void Board::printBoardStats()
     // print all the settlements
     for (size_t i = 0; i < settlements->size(); i++)
     {
-        cout << "Settlement at coord " << (*settlements)[i].coord << " owned by " << (*settlements)[i].owner->getName() << endl;
+        cout << "Settlements at coord " << (*settlements)[i].coord << " owned by " << (*settlements)[i].owner->getName() << endl;
     }
 
     // print all the cities
