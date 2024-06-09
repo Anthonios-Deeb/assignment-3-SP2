@@ -1,6 +1,15 @@
 #include "Catan.hpp"
 
-Catan::Catan() : board(), p1(nullptr), p2(nullptr), p3(nullptr), p4(nullptr) {}
+Catan::Catan(){
+  board = new Board();
+  players = new vector<Player*>();
+}
+
+Catan::~Catan()
+{
+  delete board;
+  delete players;
+}
 
 Catan &Catan::getInstance()
 {
@@ -8,15 +17,18 @@ Catan &Catan::getInstance()
   return instance;
 }
 
-Board Catan::getBoard()
+Board* Catan::getBoard()
 {
   return board;
 }
 
 void Catan::addPlayers(Player *p1, Player *p2, Player *p3, Player *p4)
-{
-  this->p1 = p1;
-  this->p2 = p2;
-  this->p3 = p3;
-  this->p4 = p4;
+{ 
+  players->push_back(p1);
+  players->push_back(p2);
+  players->push_back(p3);
+  if (p4 != nullptr)
+  {
+    players->push_back(p4);
+  }
 }

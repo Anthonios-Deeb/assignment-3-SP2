@@ -20,6 +20,7 @@ public:
 
 protected:
   CardType type;
+  Player *owner;
 };
 
 class MonopolyCard : public Card

@@ -11,23 +11,18 @@ class Catan
 
 public:
   static Catan &getInstance();
-
+  ~Catan();
   Catan(Catan const &) = delete;
-
   void operator=(Catan const &) = delete;
-
   void addPlayers(Player *p1, Player *p2, Player *p3, Player *p4 = nullptr); // Adds a player to the game
+  vector<Player *> getPlayers();          // Returns the players
+  Board* getBoard();                      // Returns the Board
+  
 
-  Board getBoard();                      // Returns the Board
-  pair<int, int> chooseStartingPlayer(); // Returns the player number of the starting player
 private:
   Catan();
-
-  Board board;
-  Player *p1;
-  Player *p2;
-  Player *p3;
-  Player *p4;
+  Board *board;
+  vector<Player*>* players;
 };
 
 #endif // CATAN_HPP

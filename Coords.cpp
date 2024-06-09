@@ -1,4 +1,5 @@
 #include "Coords.hpp"
+#include <iostream>
 
 void Coords :: initilaizeVerticesCords()
 {

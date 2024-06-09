@@ -68,17 +68,14 @@ void Player::deductResource(string type)
     resources[WOOD].second--;
     resources[BRICK].second--;
     return;
-  }
-  if (type == "Settlement")
+  }else if (type == "Settlement")
   {
     resources[WOOD].second--;
     resources[BRICK].second--;
     resources[WOOL].second--;
     resources[WHEAT].second--;
     return;
-  }
-
-  if (type == "City")
+  } else if (type == "City")
   {
     resources[WHEAT].second -= 2;
     resources[IRON].second -= 3;
@@ -100,13 +97,13 @@ ostream &operator<<(ostream &os, const Player &player)
 
 int Player::RollDice()
 {
-  int diceRoll = 2 ;//rand() % 12 + 1;
+  int diceRoll = rand() % 12 + 1;
 
   Catan &c = Catan::getInstance();
-  Board b = c.getBoard();
+  Board *b = c.getBoard();
 
-  vector<HexTile>* hexTiles = b.getHexTiles();
-  vector<Settlement>* settlements = b.getSettlements();
+  vector<HexTile>* hexTiles = b->getHexTiles();
+  vector<Settlement>* settlements = b->getSettlements();
 
   for (size_t i = 0; i < settlements->size(); i++)
   {
@@ -141,4 +138,14 @@ void Player::addResource(ResourceType type, bool isCity)
   {
     resources[type].second++;
   }
+}
+
+void Player::setRescource(ResourceType type, int amount)
+{
+  resources[type].second = amount;
+}
+
+void Player::setfreeRoads()
+{
+  freeRoads = 2;
 }

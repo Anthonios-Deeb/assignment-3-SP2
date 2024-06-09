@@ -11,13 +11,15 @@ int main()
 
   Catan &c = Catan::getInstance();
   c.addPlayers(&p1, &p2, &p3);
-  Board b = c.getBoard();
+  Board *b = c.getBoard();
 
-  b.placeSettlement("EBF", p1);
+  b->placeSettlement("EBF", p1);
 
   p1.RollDice();
-  
+
   cout << p1 << endl;
-  
+
+
+
   return 0;
 }

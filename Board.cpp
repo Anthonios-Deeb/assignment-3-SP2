@@ -25,13 +25,12 @@ void Board::initializeBoard()
     hexTiles->push_back(HexTile(WOOL, 11, 'S', "Pasture Land"));
 }
 
-Board::Board()
+Board::Board() : coords()
 {
     this->hexTiles = new vector<HexTile>();
     this->roads = new vector<Road>();
     this->settlements = new vector<Settlement>();
     this->cities = new vector<City>();
-    coords = Coords();
     initializeBoard();
 }
 
@@ -70,7 +69,7 @@ bool Board::CheckSettlementsRules(Settlement settlement)
         cout << "There is NO Such Coord" << endl;
         return false;
     }
-
+   
     Player owner = *(settlement.owner);
 
     for (size_t i = 0; i < settlements->size(); i++)
@@ -225,6 +224,7 @@ void Board::placeSettlement(string cord, Player &player)
             return;
         }
     }
+    return;
 }
 
 void Board::placeCity(string cord, Player &player)
@@ -243,26 +243,6 @@ void Board::placeCity(string cord, Player &player)
     }
 }
 
-string getResourceName(ResourceType resource)
-{
-    switch (resource)
-    {
-    case DESERT:
-        return "Desert";
-    case WOOD:
-        return "Wood";
-    case BRICK:
-        return "Brick";
-    case WOOL:
-        return "WOOL";
-    case WHEAT:
-        return "Wheat";
-    case IRON:
-        return "IRON";
-    default:
-        return "None";
-    }
-}
 
 void Board::printBoardStats()
 {

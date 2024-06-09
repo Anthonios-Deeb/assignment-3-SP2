@@ -15,6 +15,7 @@ class Board
 {
 public:
   Board();
+  ~Board();
   void placeRoad(string cord, Player &owner);
   void placeSettlement(string cord, Player &owner);
   void placeCity(string cord, Player &owner);
@@ -23,21 +24,20 @@ public:
   vector<Road>* getRoads();
   vector<City>* getCities();
   vector<HexTile>* getHexTiles();
-  ~Board();
+  
 
 private:
   Coords coords;
-  void initializeBoard();
   vector<HexTile>* hexTiles;
   vector<Road>* roads;
   vector<Settlement>* settlements;
   vector<City>* cities;
-  bool CanPlaceCity(City city);
 
+  void initializeBoard();
+  bool CanPlaceCity(City city);
   bool CheckSettlementsRules(Settlement settlement);
   bool CheckAdjacentSettlements(Settlement& settlement);
   bool CheckRoadsRules(Road road);
-
 };
 
 #endif // BOARD_HPP
