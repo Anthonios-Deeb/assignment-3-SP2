@@ -2,16 +2,27 @@
 
 ### Overview
 In this project we have multiple classes :
+
 -`Catan`: This class represents the game itself.
+
 -`Board`: This class represents the board in the game.
+
 -`HexTile`: This class represnets a hextile that is used to make the Board.
+
 -`Coords`: This class contains all the coorinations.
+
 -`Resources`:This class contains the enum for all the resources.
+
 -`Card`: This files contains different classes each class represnt a different type of card.
+
 -`CardType`: This class contains the enum for the types of cards.
+
 -`Settlement`: This class represents a settelemnt.
+
 -`Road`: This class represents a road.
+
 -`City`: This class represents a city.
+
 -`Player`: This class represents a player
 
 I'm only going to address Catan, Board, Player
