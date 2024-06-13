@@ -1,87 +1,93 @@
-## Catan 
+# Catan 
 
 ### Overview
 In this project we have multiple classes :
 -`Catan`: This class represents the game itself.
--`Board`: This class represents the Board in the game.
--`Settlement`: This class
+-`Board`: This class represents the board in the game.
+-`HexTile`: This class represnets a hextile that is used to make the Board.
+-`Coords`: This class contains all the coorinations.
+-`Resources`:This class contains the enum for all the resources.
+-`Card`: This files contains different classes each class represnt a different type of card.
+-`CardType`: This class contains the enum for the types of cards.
+-`Settlement`: This class represents a settelemnt.
+-`Road`: This class represents a road.
+-`City`: This class represents a city.
+-`Player`: This class represents a player
 
-### Features
-- `Load Graph`: Load a graph into the `Graph` object.
-- `Print Graph`: Print the adjacency list representation of the loaded graph.
-- `Get Adjacency Matrix`: Retrieve the adjacency matrix of the loaded graph.
+I'm only going to address Catan, Board, Player
 
-### Usage
-1. `Constructor`: Default constructor to initialize the graph.
-2. `Destructor`: The destructor is defaulted, handling memory deallocation.
-3. `Load Graph`: Use the loadGraph method to load a graph represented by a vector of vectors of integers.
-4. `printGraph()`:  Call the printGraph method to print the adjacency list representation of the loaded graph.
-5. `getNumVertices()`: Method to get the number of vertices in the graph.
-7. `getAdjacencyMatrix()`: Use the getAdjMatrix method to retrieve the adjacency matrix of the loaded graph.
+## Board Class
 
-### Usage
-To use this class, include the `Graph.hpp` header file in your C++ project. Instantiate an object of the `Graph` class and use its methods to perform operations on the graph.
+## Overview
 
-Example:
-```cpp
-#include "Graph.hpp"
-#include <iostream>
+The `Board` class represents a Catan game board that includes hexagonal tiles, roads, settlements, and cities. It provides functionalities to place and manage these components on the board.
 
-int main() {
-  Graph myGraph;
-  vector<vector<int>> adjacencyList = {
-    {0, 1, 1, 0},
-    {1, 0, 0, 1},
-    {1, 0, 0, 1},
-    {0, 1, 1, 0}};
-myGraph.loadGraph(adjacencyList);
-myGraph.printGraph();
-vector<vector<int>> adjacencyMatrix = myGraph.getAdjMatrix();
-return 0;
-}
-```
+## Contents
 
-## Algorithms Class
+1. **Files Included:**
+   - `Board.hpp`: Header file for the `Board` class.
+   - `Board.cpp`: Implementation file for the `Board` class.
+   - Other headers: `HexTile.hpp`, `Road.hpp`, `Settlement.hpp`, `City.hpp`, `Coords.hpp`.
 
-The following algorithms are implemented:
+2. **Dependencies:**
+   - Standard Library: `<string>`, `<vector>`.
+   - Custom Components: `HexTile`, `Road`, `Settlement`, `City`, `Coords`.
 
-- `isConnected(Graph& g)`: Determines whether the graph is connected or not. Returns a boolean value indicating connectivity.
-- `shortestPath(Graph& g, int start, int end)`: Computes the shortest path between two nodes in the graph. Returns the shortest path as a string if one exists, otherwise returns -1.
-- `isContainsCycle(Graph& g)`: Checks if the graph contains a cycles. Returns a string that contains the path of the cycle if found, otherwise returns an -1.
-- `isBipartite(Graph& g)`: Determines whether the graph is bipartite or not. Returns a string that contains two sets if bipartite, otherwise returns -1.
-- `negativeCycle(Graph& g)`: Checks if the graph contains a negative cycle. Returns a string of the negative cycle if found, otherwise returns -1.
+## Class Members
 
-### Usage
+### Public Methods
 
-To use the `Algorithms` class, include the `Algorithms.hpp` header file in your C++ source code. Then, call the desired static methods by passing a reference to a Graph object as an argument.
+- **`bool placeRoad(string cord)`**
+  - Attempts to place a road on the board at the specified coordinates.
+  - Returns `true` if the road is placed successfully.
 
-```cpp
-#include "Algorithms.hpp"
-#include "Graph.hpp"
-#include <iostream>
+- **`bool placeSettlement(string cord)`**
+  - Attempts to place a settlement on the board at the specified coordinates.
+  - Returns `true` if the settlement is placed successfully.
 
-using namespace ariel;
+- **`bool placeCity(string cord)`**
+  - Attempts to place a city on the board at the specified coordinates.
+  - Returns `true` if the city is placed successfully.
 
-int main() {
-    // Create a Graph object and populate it with data
+- **`void printBoardStats()`**
+  - Prints information about the settlements, cities, and roads currently on the board.
 
-    // Example 1: Check if the graph is connected
-    Graph graph1;
-    // Load graph data into graph1
-    int connected = Algorithms::isConnected(graph1);
-    if (connected) {
-        std::cout << "The graph is connected." << std::endl;
-    } else {
-        std::cout << "The graph is not connected." << std::endl;
-    }
+- **`vector<Settlement> *getSettlements()`**
+  - Returns a pointer to the vector of settlements currently on the board.
 
-    // Example 2: Find the shortest path between two vertices
-    Graph graph2;
-    // Load graph data into graph2
-    std::string path = Algorithms::shortestPath(graph2, startVertex, endVertex);
-    std::cout << "Shortest path: " << path << std::endl;
+- **`vector<Road> *getRoads()`**
+  - Returns a pointer to the vector of roads currently on the board.
 
-    // Additional examples for other algorithms...
-    
-    return 0;
-}
+- **`vector<City> *getCities()`**
+  - Returns a pointer to the vector of cities currently on the board.
+
+- **`vector<HexTile> *getHexTiles()`**
+  - Returns a pointer to the vector of hexagonal tiles representing the board.
+
+### Private Methods
+
+- **`void initializeBoard()`**
+  - Initializes the board with hexagonal tiles and sets up initial configurations.
+
+- **`bool checkCityRules(City city)`**
+  - Checks if placing a city at a given location complies with game rules.
+
+- **`bool checkSettlementRules(Settlement settlement)`**
+  - Checks if placing a settlement at a given location complies with game rules.
+
+- **`bool checkRoadRules(Road road)`**
+  - Checks if placing a road at a given location complies with game rules.
+
+## Usage
+
+To use the `Board` class in your application:
+
+1. Include `"Board.hpp"` in your source files.
+2. Create an instance of `Board` using `Board board;`.
+3. Use public methods like `placeRoad`, `placeSettlement`, and `placeCity` to interact with the board.
+4. Access board statistics or specific components using getter methods like `getSettlements`, `getRoads`, etc.
+
+## Notes
+
+- Ensure that coordinates passed to `placeRoad`, `placeSettlement`, and `placeCity` are valid and within the bounds of the board.
+- Implement additional game rules and validations in the respective check methods (`checkCityRules`, `checkSettlementRules`, `checkRoadRules`) as per your game's requirements.
