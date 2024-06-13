@@ -83,6 +83,7 @@ int main()
   cout << *c.getPlayers()->at(1) << endl;
   c.endTurn();
 
+  //buying cards
   cout << "-------------------" << endl;
   player = c.getPlayerTurn();
   player->buyCard();
