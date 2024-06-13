@@ -1,3 +1,5 @@
+// 3993
+// anthoniosdb@gmail.com
 #ifndef BOARD_HPP
 #define BOARD_HPP
 
@@ -11,33 +13,33 @@
 using namespace std;
 using namespace Components;
 
+
+
 class Board
 {
 public:
   Board();
   ~Board();
-  void placeRoad(string cord, Player &owner);
-  void placeSettlement(string cord, Player &owner);
-  void placeCity(string cord, Player &owner);
-  void printBoardStats();
-  vector<Settlement>* getSettlements();
-  vector<Road>* getRoads();
-  vector<City>* getCities();
-  vector<HexTile>* getHexTiles();
-  
+  bool placeRoad(string cord);          // returns true if road is placed successfully
+  bool placeSettlement(string cord);    // returns true if settlement is placed successfully
+  bool placeCity(string cord);          // returns true if city is placed successfully
+  void printBoardStats();               // prints the informaion about the sttelements, cities, and roads on the board
+  vector<Settlement> *getSettlements(); // returns the vector of settlements
+  vector<Road> *getRoads();             // returns the vector of roads
+  vector<City> *getCities();            // returns the vector of cities
+  vector<HexTile> *getHexTiles();       // returns the vector of hexTiles
 
 private:
   Coords coords;
-  vector<HexTile>* hexTiles;
-  vector<Road>* roads;
-  vector<Settlement>* settlements;
-  vector<City>* cities;
+  vector<HexTile> *hexTiles;
+  vector<Road> *roads;
+  vector<Settlement> *settlements;
+  vector<City> *cities;
 
-  void initializeBoard();
-  bool CanPlaceCity(City city);
-  bool CheckSettlementsRules(Settlement settlement);
-  bool CheckAdjacentSettlements(Settlement& settlement);
-  bool CheckRoadsRules(Road road);
+  void initializeBoard();                           // initializes the board with hexTiles
+  bool checkCityRules(City city);                   // checks if the city can be placed on the board
+  bool checkSettlementRules(Settlement settlement); // checks if the settlement can be placed on the board
+  bool checkRoadRules(Road road);                   // checks if the road can be placed on the board
 };
 
 #endif // BOARD_HPP

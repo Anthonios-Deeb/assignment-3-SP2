@@ -1,3 +1,5 @@
+// 3993
+// anthoniosdb@gmail.com
 #ifndef ROAD_HPP
 #define ROAD_HPP
 
@@ -9,9 +11,15 @@ namespace Components
   class Road
   {
   public:
-    Road(string coord , Player &owner) : coord(coord), owner(owner) {}
+    Road(string coord, Player &owner) : coord(coord), owner(&owner) {}
+
+    // getters
+    string getCoord() const;
+    Player *getOwner() const;
+
+  private:
     string coord;
-    Player owner;
+    Player *owner;
   };
 }
 

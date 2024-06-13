@@ -1,7 +1,10 @@
+// 3993
+// anthoniosdb@gmail.com
 #include "Coords.hpp"
 #include <iostream>
 
-void Coords :: initilaizeVerticesCords()
+// initialize the list of vertices coords
+void Coords ::initilaizeVerticesCoords()
 {
   verticesCords.push_back("Aab");
   verticesCords.push_back("Bbc");
@@ -68,11 +71,10 @@ void Coords :: initilaizeVerticesCords()
   verticesCords.push_back("Qlm");
   verticesCords.push_back("Rkl");
   verticesCords.push_back("Sjk");
-
-
 }
 
-void Coords :: initilaizeEdgesCords()
+// initialize the list of edges coords
+void Coords ::initilaizeEdgesCoords()
 {
   edgesCords.push_back("Aa");
   edgesCords.push_back("Ab");
@@ -85,7 +87,7 @@ void Coords :: initilaizeEdgesCords()
   edgesCords.push_back("AB");
   edgesCords.push_back("BC");
   edgesCords.push_back("Ce");
-  
+
   edgesCords.push_back("Dr");
   edgesCords.push_back("AD");
   edgesCords.push_back("AE");
@@ -100,7 +102,7 @@ void Coords :: initilaizeEdgesCords()
   edgesCords.push_back("EF");
   edgesCords.push_back("FG");
   edgesCords.push_back("Gf");
-  
+
   edgesCords.push_back("Hq");
   edgesCords.push_back("DH");
   edgesCords.push_back("DI");
@@ -156,31 +158,34 @@ void Coords :: initilaizeEdgesCords()
   edgesCords.push_back("Rk");
   edgesCords.push_back("Sk");
   edgesCords.push_back("Sj");
-
 }
 
 Coords::Coords()
 {
-  initilaizeVerticesCords();
-  initilaizeEdgesCords();  
+  initilaizeVerticesCoords();
+  initilaizeEdgesCoords();
 }
 
-
-vector<string> Coords::getVerticesCords() {
+vector<string> Coords::getVerticesCords()
+{
   return verticesCords;
 }
 
-vector<string> Coords::getEdgesCords() {
+vector<string> Coords::getEdgesCords()
+{
   return edgesCords;
 }
 
-//both of the strings are 3 characters long I want to check if any 2 charecters from cord1 match with any 2 charecters from cord2
+// both of the strings are 3 characters long I want to check if any 2 charecters from cord1 match with any 2 charecters from cord2
 bool Coords::isSettlementAdjacent(string cord1, string cord2)
 {
   int count = 0;
-  for (int i = 0; i < 3; i++) {
-    for (int j = 0; j < 3; j++) {
-      if (cord1[i] == cord2[j]) {
+  for (int i = 0; i < 3; i++)
+  {
+    for (int j = 0; j < 3; j++)
+    {
+      if (cord1[i] == cord2[j])
+      {
         count++;
       }
     }
@@ -188,38 +193,46 @@ bool Coords::isSettlementAdjacent(string cord1, string cord2)
   return count == 2;
 }
 
-
-bool Coords::isSettlementAdjacentRoad(string cord1, string cord2)
+// given a road and a settlement I want to check if any 2 charecters from the road match with any 2 charecters from the settlement
+bool Coords::isSettlementAdjacentRoad(string roadCoord, string SettlementCoord)
 {
   int count = 0;
-  for (int i = 0; i < 2; i++) {
-    for (int j = 0; j < 3; j++) {
-      if (cord1[i] == cord2[j]) {
+  for (int i = 0; i < 2; i++)
+  {
+    for (int j = 0; j < 3; j++)
+    {
+      if (roadCoord[i] == SettlementCoord[j])
+      {
         count++;
       }
     }
   }
   return count >= 2;
 }
-//given 2 cords I want to check if I can make a any 3 chars combination that matches one of the vertices cords
+
+// given 2 cords I want to check if I can make any 3 chars combination that matches one of the vertices cords
 bool Coords::isRoadAdjacentRoad(string cord1, string cord2)
 {
+  // check if there is no common char between the two cords
   if (cord1[0] != cord2[0] && cord1[0] != cord2[1] && cord1[1] != cord2[0] && cord1[1] != cord2[1])
   {
     return false;
   }
 
-  //get the three chars
+  // get the three chars
   string c1 = cord1.substr(0, 1);
   string c2 = cord1.substr(1, 1);
   string c3;
-  if (c1 == cord2.substr(0, 1) || c2 == cord1.substr(0, 1)) {
+  if (c1 == cord2.substr(0, 1) || c2 == cord1.substr(0, 1))
+  {
     c3 = cord2.substr(1, 1);
   }
-  else 
+  else
   {
     c3 = cord2.substr(0, 1);
   }
+
+  // check if the combination exists in the list of vertices cords
   string atempt1 = c1 + c2 + c3;
   string atempt2 = c1 + c3 + c2;
   string atempt3 = c2 + c1 + c3;
@@ -227,6 +240,7 @@ bool Coords::isRoadAdjacentRoad(string cord1, string cord2)
   string atempt5 = c3 + c1 + c2;
   string atempt6 = c3 + c2 + c1;
 
+  // check if the combination exists in the list of vertices cords
   for (size_t i = 0; i < verticesCords.size(); i++)
   {
     if (verticesCords[i] == atempt1 || verticesCords[i] == atempt2 || verticesCords[i] == atempt3 || verticesCords[i] == atempt4 || verticesCords[i] == atempt5 || verticesCords[i] == atempt6)
@@ -237,6 +251,7 @@ bool Coords::isRoadAdjacentRoad(string cord1, string cord2)
   return false;
 }
 
+// check if the edge cord exists in the list of edge cords
 bool Coords::ifEdgeCoordExists(string cord)
 {
   for (size_t i = 0; i < edgesCords.size(); i++)
@@ -249,6 +264,7 @@ bool Coords::ifEdgeCoordExists(string cord)
   return false;
 }
 
+// check if the vertex cord exists in the list of vertex cords
 bool Coords::ifVertexCoordExists(string cord)
 {
   for (size_t i = 0; i < verticesCords.size(); i++)

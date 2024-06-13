@@ -1,21 +1,8 @@
-#ifndef RESOURCES_HPP
-#define RESOURCES_HPP
-#include <string>
-using namespace std;
+// 3993
+// anthoniosdb@gmail.com
+#include "Resources.hpp"
 
-
-enum ResourceType
-{
-  WOOD,
-  BRICK,
-  WHEAT,
-  WOOL,
-  IRON,
-  DESERT,
-  NONE
-};
-
-static string getResourceName(ResourceType resource)
+string getResourceName(ResourceType resource)
 {
     switch (resource)
     {
@@ -36,10 +23,10 @@ static string getResourceName(ResourceType resource)
     }
 }
 
-static enum ResourceType getResourceType(string resource)
+enum ResourceType getResourceType(string resource)
 {
     // convert string to lowercase
-    for (int i = 0; i < resource.length(); i++)
+    for (size_t i = 0; i < resource.length(); i++)
     {
         resource[i] = tolower(resource[i]);
     }
@@ -73,6 +60,3 @@ static enum ResourceType getResourceType(string resource)
         return NONE;
     }
 }
-
-
-#endif // RESOURCES_HPP

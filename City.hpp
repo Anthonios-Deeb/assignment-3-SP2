@@ -1,3 +1,5 @@
+// 3993
+// anthoniosdb@gmail.com
 #ifndef CITY_HPP
 #define CITY_HPP
 
@@ -11,28 +13,15 @@ namespace Components
   class City
   {
   public:
+    City(std::string coord, Player &owner);
+
+    // getters
+    std::string getCoord() const;
+    Player *getOwner() const;
+
+  private:
     string coord;
     Player *owner;
-
-    City(std::string coord, Player &owner) : coord(coord), owner(&owner)
-    {
-    }
-
-    // Define copy constructor
-    City(const City &other) : coord(other.coord), owner(other.owner)
-    {
-    }
-
-    // Define copy assignment operator
-    City &operator=(const City &other)
-    {
-      if (this != &other)
-      {
-        coord = other.coord;
-        owner = other.owner;
-      }
-      return *this;
-    }
   };
 }
 
