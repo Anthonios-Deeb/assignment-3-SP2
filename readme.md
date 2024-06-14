@@ -1,5 +1,7 @@
 # Catan 
 
+![Board](https://github.com/Anthonios-Deeb/assignment-3-SP2/blob/main/A.webp)
+
 ### Overview
 In this project we have multiple classes :
 
